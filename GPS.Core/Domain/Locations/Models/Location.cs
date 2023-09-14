@@ -24,13 +24,13 @@ public class Location
 
     public DateTime CreateTime { get; set; }
 
-    public async Task<Location> CreateAsync(double latitude, double longitude)
+    public static async Task<Location> CreateAsync(double latitude, double longitude)
     {
         var location = new Location(latitude, longitude, DateTime.UtcNow);
         return location;
     }
 
-    public async Task UpdateAsync(UpdateLocationData data)
+    public async Task UpdateAsync(UpdateLocationData data, CancellationToken cancellationToken)
     {
         Latitude = data.Latitude;
         Longitude = data.Longitude;

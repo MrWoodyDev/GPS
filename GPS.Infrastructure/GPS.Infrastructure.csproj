@@ -12,4 +12,8 @@
     <ProjectReference Include="..\GPS.Persistance\GPS.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Domain\Locations\Queries\" />
+  </ItemGroup>
+
 </Project>

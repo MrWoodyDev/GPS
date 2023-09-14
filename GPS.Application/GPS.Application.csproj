@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Locations\" />
+    <Folder Include="Domain\Locations\Queries\GetLocations\" />
   </ItemGroup>
 
   <ItemGroup>
