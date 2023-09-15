@@ -6,14 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
     <ProjectReference Include="..\GPS.Application\GPS.Application.csproj" />
     <ProjectReference Include="..\GPS.Core\GPS.Core.csproj" />
     <ProjectReference Include="..\GPS.Persistance\GPS.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Core\Domain\Locations\Queries\" />
   </ItemGroup>
 
 </Project>

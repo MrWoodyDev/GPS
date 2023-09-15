@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Locations\Queries\GetLocations\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GPS.Core\GPS.Core.csproj" />
