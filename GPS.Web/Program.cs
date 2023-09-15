@@ -1,7 +1,14 @@
+using GPS.Web.Clients;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IGpsClient, GpsClient>((HttpClient httpClient, IServiceProvider provider) =>
+{
+    return new GpsClient("https://localhost:7177/", httpClient);
+});
 
 var app = builder.Build();
 
