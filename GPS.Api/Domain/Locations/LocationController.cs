@@ -1,6 +1,8 @@
 ﻿using GPS.Api.Common;
 using GPS.Api.Domain.Locations.Request;
 using GPS.Application.Domain.Locations.Commands.CreateLocation;
+using GPS.Application.Domain.Locations.Commands.RemoveLocation;
+using GPS.Application.Domain.Locations.Commands.UpdateLocation;
 using GPS.Application.Domain.Locations.Queries.GetLocationById;
 using GPS.Application.Domain.Locations.Queries.GetLocations;
 using MediatR;
@@ -38,5 +40,19 @@ public class LocationController : ControllerBase
     {
         var command = new CreateLocationCommand(request.Latitude, request.Longitude);
         return await _mediator.Send(command, cancellationToken);
+    }
+
+    [HttpPut]
+    public async Task PutLocationAsync([FromBody] UpdateLocationRequest request, CancellationToken cancellationToken)
+    {
+        var command = new UpdateLocationCommand(request.Id, request.Latitude, request.Longitude);
+        await _mediator.Send(command, cancellationToken);
+    }
+
+    [HttpDelete]
+    public async Task DeleteLocationAsync([FromBody] RemoveLocationRequest request, CancellationToken cancellationToken)
+    {
+        var command = new RemoveLocationCommand(request.Id);
+        await _mediator.Send(command, cancellationToken);
     }
 }
