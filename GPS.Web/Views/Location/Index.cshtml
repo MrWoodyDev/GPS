@@ -12,38 +12,6 @@
     <a asp-action="Edit">Set location</a>
 </p>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th></th>
-            <th>Address</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.Address
-            </td>
-            <td>
-                @item.Latitude
-            </td>
-            <td>
-                @item.Longitude
-            </td>>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                @* <a asp-action="Delete" asp-route-id="@item.Id" class="confirmDeletion">Delete</a> *@
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
-
 <script src="~/lib/leaflet/leaflet.js"></script>
 <script src="~/lib/leaflet/leaflet.min.js"></script>
 

@@ -23,21 +23,6 @@ public class LocationController : Controller
         return View(await _mediator.Send(query,cancellationToken));
     }
 
-    public async Task<IActionResult> Create()
-    {
-        return View();
-    }
-
-    [Authorize]
-    [HttpPost]
-    public async Task<RedirectToActionResult> Create(double latitude, double longitude, string address)
-    {
-        var id = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var command = new CreateLocationCommand(latitude, longitude, address, id);
-        await _mediator.Send(command);
-        return RedirectToAction("Index");
-    }
-
     public async Task<IActionResult> Edit()
     {
         return View();
