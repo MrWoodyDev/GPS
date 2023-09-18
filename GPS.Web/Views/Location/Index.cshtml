@@ -1,0 +1,34 @@
+﻿@using GPS.Application.Domain.Locations.Queries.GetLocations;
+
+@model IEnumerable<LocationDto>
+@{
+    ViewData["Title"] = "Location";
+}
+
+
+<h1>Location</h1>
+
+<p>
+    <a asp-action="Edit">Set location</a>
+</p>
+
+<script src="~/lib/leaflet/leaflet.js"></script>
+<script src="~/lib/leaflet/leaflet.min.js"></script>
+
+<div id="map" style="width:100%; height:800px"></div>
+<script>
+    var map = L.map('map').setView([48.45, 35.03], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    var jsModel = @Html.Raw(Json.Serialize(Model));
+    console.log(jsModel);
+
+    for (i in jsModel) {
+        item = jsModel[i]
+        L.marker([item.latitude, item.longitude]).addTo(map)
+            .bindPopup(item.createTime.toString());
+    }
+</script>
