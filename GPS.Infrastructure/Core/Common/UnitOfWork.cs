@@ -1,4 +1,5 @@
 ﻿using GPS.Core.Common;
+using GPS.Persistence.GpsDb;
 using GPS.Persistence.GPSDb;
 
 namespace GPS.Infrastructure.Core.Common;

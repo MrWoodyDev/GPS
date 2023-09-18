@@ -38,14 +38,14 @@ public class LocationController : ControllerBase
     [HttpPost]
     public async Task<long> PostLocationAsync([FromBody] CreateLocationRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateLocationCommand(request.Latitude, request.Longitude);
+        var command = new CreateLocationCommand(request.Latitude, request.Longitude, request.Address, request.UserId);
         return await _mediator.Send(command, cancellationToken);
     }
 
     [HttpPut]
     public async Task PutLocationAsync([FromBody] UpdateLocationRequest request, CancellationToken cancellationToken)
     {
-        var command = new UpdateLocationCommand(request.Id, request.Latitude, request.Longitude);
+        var command = new UpdateLocationCommand(request.Latitude, request.Longitude, request.Address, request.UserId);
         await _mediator.Send(command, cancellationToken);
     }
 

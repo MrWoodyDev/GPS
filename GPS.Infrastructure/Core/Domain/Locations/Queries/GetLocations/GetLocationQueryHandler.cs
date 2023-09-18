@@ -1,4 +1,5 @@
 ﻿using GPS.Application.Domain.Locations.Queries.GetLocations;
+using GPS.Persistence.GpsDb;
 using GPS.Persistence.GPSDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ public class GetLocationQueryHandler : IRequestHandler<GetLocationQuery, Locatio
                 Id = location.Id,
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,
+                Address = location.Address,
                 CreateTime = location.CreateTime
             })
             .ToArrayAsync(cancellationToken);

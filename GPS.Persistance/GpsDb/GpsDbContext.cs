@@ -1,14 +1,15 @@
 ﻿using GPS.Core.Domain.Locations.Models;
 using GPS.Persistence.GPSDb.EntityConfigurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GPS.Persistence.GPSDb;
+namespace GPS.Persistence.GpsDb;
 
-public class GpsDbContext : DbContext
+public class GpsDbContext : IdentityDbContext<AppUser>
 {
-    public GpsDbContext(DbContextOptions<GpsDbContext> options) : base(options)
+    public GpsDbContext(DbContextOptions<GpsDbContext> options)
+        : base(options)
     {
-        
     }
 
     public DbSet<Location> Locations { get; set; }

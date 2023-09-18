@@ -2,4 +2,4 @@
 
 namespace GPS.Application.Domain.Locations.Commands.UpdateLocation;
 
-public record UpdateLocationCommand(long Id, double Latitude, double Longitude) : IRequest<Unit>;
+public record UpdateLocationCommand(double Latitude, double Longitude, string Address, string UserId) : IRequest<Unit>;

@@ -4,7 +4,7 @@ namespace GPS.Core.Domain.Locations.Common;
 
 public interface ILocationRepository
 {
-    Task<Location> FindAsync(long id);
+    Task<Location> FindAsync(string userId);
 
     Task AddAsync(Location location);
 

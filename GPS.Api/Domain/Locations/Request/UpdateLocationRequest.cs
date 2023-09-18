@@ -1,3 +1,3 @@
 ﻿namespace GPS.Api.Domain.Locations.Request;
 
-public record UpdateLocationRequest(long Id, double Latitude, double Longitude);
+public record UpdateLocationRequest(string UserId, double Latitude, double Longitude, string Address);

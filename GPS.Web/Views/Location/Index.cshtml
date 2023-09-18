@@ -1,5 +1,6 @@
-﻿@model IEnumerable<LocationDto>
-@using GPS.Web.Clients
+﻿@using GPS.Application.Domain.Locations.Queries.GetLocations;
+
+@model IEnumerable<LocationDto>
 @{
     ViewData["Title"] = "Location";
 }
@@ -20,7 +21,7 @@
 
     for (i in jsModel) {
         item = jsModel[i]
-        L.marker([item.latitude, item.longitude]).addTo(map);
+        L.marker([item.latitude, item.longitude]).addTo(map)
+            .bindPopup(item.createTime);
     }
-
 </script>

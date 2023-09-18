@@ -1,5 +1,5 @@
 ﻿using GPS.Application.Domain.Locations.Queries.GetLocationById;
-using GPS.Persistence.GPSDb;
+using GPS.Persistence.GpsDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +24,7 @@ public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery,
                 Id = location.Id,
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,
+                Address = location.Address,
                 CreateTime = location.CreateTime
             })
             .FirstOrDefaultAsync(location => location.Id == request.Id, cancellationToken);

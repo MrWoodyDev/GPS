@@ -1,14 +1,24 @@
-using GPS.Web.Clients;
+using GPS.Application;
+using GPS.Core.Domain.Locations.Models;
+using GPS.Infrastructure;
+using GPS.Persistence;
+using GPS.Persistence.GpsDb;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("GpsDb") ?? throw new InvalidOperationException("Connection string 'GPSWebContextConnection' not found.");
+
+builder.Services.AddDbContext<GpsDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<GpsDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddHttpClient<IGpsClient, GpsClient>((HttpClient httpClient, IServiceProvider provider) =>
-{
-    return new GpsClient("https://localhost:7177/", httpClient);
-});
+builder.Services.AddInfrastructureRegistration();
+builder.Services.AddApplicationRegistration();
+//builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -21,14 +31,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

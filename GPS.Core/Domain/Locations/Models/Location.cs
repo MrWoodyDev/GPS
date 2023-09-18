@@ -9,11 +9,13 @@ public class Location
         
     }
 
-    public Location(double latitude, double longitude, DateTime createTime)
+    public Location(double latitude, double longitude, string address, string userId, DateTime createTime)
     {
         Latitude = latitude;
         Longitude = longitude;
         CreateTime = createTime;
+        Address = address;
+        UserId = userId;
     }
 
     public long Id { get; private set; }
@@ -22,11 +24,15 @@ public class Location
 
     public double Longitude { get;  set;}
 
+    public string Address { get; set; }
+
     public DateTime CreateTime { get; set; }
 
-    public static async Task<Location> CreateAsync(double latitude, double longitude)
+    public string? UserId { get; set; }
+
+    public static async Task<Location> CreateAsync(double latitude, double longitude, string address, string userId)
     {
-        var location = new Location(latitude, longitude, DateTime.UtcNow);
+        var location = new Location(latitude, longitude, address, userId, DateTime.UtcNow);
         return location;
     }
 
@@ -34,6 +40,8 @@ public class Location
     {
         Latitude = data.Latitude;
         Longitude = data.Longitude;
+        Address = data.Address;
+        UserId = data.UserId;
         CreateTime = DateTime.UtcNow;
     }
 }

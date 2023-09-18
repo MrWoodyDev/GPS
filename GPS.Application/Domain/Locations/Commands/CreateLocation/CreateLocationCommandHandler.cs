@@ -18,7 +18,7 @@ public class CreateLocationCommandHandler : IRequestHandler<CreateLocationComman
 
     public async Task<long> Handle(CreateLocationCommand command, CancellationToken cancellationToken)
     {
-        var location = await Location.CreateAsync(command.Latitude, command.Longitude);
+        var location = await Location.CreateAsync(command.Latitude, command.Longitude, command.Address, command.UserId);
         await _locationRepository.AddAsync(location);
         await _unitOfWork.SaveChanges(cancellationToken);
         return location.Id;

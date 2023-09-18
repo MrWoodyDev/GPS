@@ -8,5 +8,7 @@ public record LocationByIdDto
 
     public double Longitude { get; init; }
 
+    public string Address { get; init; }
+
     public DateTime CreateTime { get; init; }
 }

@@ -1,5 +1,6 @@
 ﻿using GPS.Core.Domain.Locations.Common;
 using GPS.Core.Domain.Locations.Models;
+using GPS.Persistence.GpsDb;
 using GPS.Persistence.GPSDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,9 @@ public class LocationRepository : ILocationRepository
         _dbContext = dbContext;
     }
 
-    public async Task<Location> FindAsync(long id)
+    public async Task<Location> FindAsync(string userId)
     {
-        var location = await _dbContext.Locations.SingleOrDefaultAsync(x => x.Id == id);
+        var location = await _dbContext.Locations.SingleOrDefaultAsync(x => x.UserId == userId);
         return location ?? throw new InvalidOperationException();
     }
 
