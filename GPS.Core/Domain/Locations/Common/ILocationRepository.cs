@@ -8,5 +8,7 @@ public interface ILocationRepository
 
     Task AddAsync(Location location);
 
+    Task UpdateAsync(double latitude, double longitude, string address, string userId);
+
     Task DeleteAsync(long id);
 }
