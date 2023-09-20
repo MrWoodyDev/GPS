@@ -4,11 +4,9 @@ namespace GPS.Core.Domain.Locations.Common;
 
 public interface ILocationRepository
 {
-    Task<Location> FindAsync(string userId);
+    Task<Location> FindAsync(string login, string password);
 
     Task AddAsync(Location location);
 
-    Task UpdateAsync(double latitude, double longitude, string address, string userId);
-
-    Task DeleteAsync(long id);
+    Task DeleteAsync(string login, string password);
 }

@@ -1,7 +1,5 @@
 using GPS.Application;
-using GPS.Core.Domain.Locations.Models;
 using GPS.Infrastructure;
-using GPS.Persistence;
 using GPS.Persistence.GpsDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +8,6 @@ var connectionString = builder.Configuration.GetConnectionString("GpsDb") ?? thr
 
 builder.Services.AddDbContext<GpsDbContext>(options =>
     options.UseNpgsql(connectionString));
-
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<GpsDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -43,6 +38,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
 
 app.Run();

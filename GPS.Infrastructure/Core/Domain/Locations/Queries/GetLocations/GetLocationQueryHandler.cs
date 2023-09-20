@@ -1,6 +1,5 @@
 ﻿using GPS.Application.Domain.Locations.Queries.GetLocations;
 using GPS.Persistence.GpsDb;
-using GPS.Persistence.GPSDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,13 +18,15 @@ public class GetLocationQueryHandler : IRequestHandler<GetLocationQuery, Locatio
     {
         var sqlQuery = _dbContext.Locations.AsNoTracking();
         var data = await sqlQuery
-            .OrderByDescending(location => location.Id)
+            .OrderByDescending(location => location.Login)
             .Select(location => new LocationDto
             {
-                Id = location.Id,
+                FirstName = location.FirstName,
+                LastName = location.LastName,
+                MiddleName = location.MiddleName,
+                JobTitle = location.JobTitle,
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,
-                Address = location.Address,
                 CreateTime = location.CreateTime
             })
             .ToArrayAsync(cancellationToken);

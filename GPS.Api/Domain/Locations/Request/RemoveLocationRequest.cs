@@ -1,3 +1,3 @@
 ﻿namespace GPS.Api.Domain.Locations.Request;
 
-public record RemoveLocationRequest(long Id);
+public record RemoveLocationRequest(string Login, string Password);

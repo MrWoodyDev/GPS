@@ -8,9 +8,6 @@
 
 <h1>Location</h1>
 
-<p>
-    <a asp-action="Edit">Set location</a>
-</p>
 
 <script src="~/lib/leaflet/leaflet.js"></script>
 <script src="~/lib/leaflet/leaflet.min.js"></script>
@@ -28,7 +25,12 @@
 
     for (i in jsModel) {
         item = jsModel[i]
+        var popupContent = '<b>First name:</b>' + item.firstName + 
+        '<br><b>Last name:</b>' + item.lastName + 
+        '<br><b>Middle name:</b>' + item.middleName +
+        '<br><b>Job title:</b>' + item.jobTitle +
+        '<br><b>Create time:</b>' + item.createTime.toString();
         L.marker([item.latitude, item.longitude]).addTo(map)
-            .bindPopup(item.createTime.toString());
+            .bindPopup(popupContent);
     }
 </script>

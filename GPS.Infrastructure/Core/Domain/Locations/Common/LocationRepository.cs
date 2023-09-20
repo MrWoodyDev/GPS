@@ -15,9 +15,9 @@ public class LocationRepository : ILocationRepository
         _dbContext = dbContext;
     }
 
-    public async Task<Location> FindAsync(string userId)
+    public async Task<Location> FindAsync(string login, string password)
     {
-        var location = await _dbContext.Locations.SingleOrDefaultAsync(x => x.UserId == userId);
+        var location = await _dbContext.Locations.SingleOrDefaultAsync(x => x.Login == login && x.Password == password);
         return location ?? throw new InvalidOperationException();
     }
 
@@ -26,35 +26,9 @@ public class LocationRepository : ILocationRepository
         await _dbContext.AddAsync(location);
     }
 
-    public async Task UpdateAsync(double latitude, double longitude, string address, string userId)
+    public async Task DeleteAsync(string login, string password)
     {
-        _dbContext.Database.BeginTransaction();
-        try
-        {
-            var location = _dbContext.Locations.FirstOrDefault(x => x.UserId == userId);
-            if (location is null)
-            {
-                location = new Location(latitude, longitude, address, userId, DateTime.UtcNow);
-                _dbContext.Locations.Add(location);
-            }
-            else
-            {
-                location.Latitude = latitude;
-                location.Longitude = longitude;
-                location.Address = address;
-            }
-            await _dbContext.SaveChangesAsync();
-            _dbContext.Database.CommitTransaction();
-        }
-        catch
-        {
-            _dbContext.Database.RollbackTransaction();
-        }
-    }
-
-    public async Task DeleteAsync(long id)
-    {
-        var locationToBeRemoved = await _dbContext.Locations.SingleOrDefaultAsync(x => x.Id == id);
+        var locationToBeRemoved = await _dbContext.Locations.SingleOrDefaultAsync(x => x.Login == login && x.Password == password);
         if(locationToBeRemoved is null) throw new InvalidOperationException();
         _dbContext.Locations.Remove(locationToBeRemoved);
     }

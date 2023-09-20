@@ -2,4 +2,4 @@
 
 namespace GPS.Application.Domain.Locations.Commands.CreateLocation;
 
-public record CreateLocationCommand(double Latitude, double Longitude, string Address, string UserId) : IRequest<long>;
+public record CreateLocationCommand(string Login, string Password, string FirstName, string LastName, string MiddleName, string JobTitle, double Latitude, double Longitude) : IRequest<Unit>;

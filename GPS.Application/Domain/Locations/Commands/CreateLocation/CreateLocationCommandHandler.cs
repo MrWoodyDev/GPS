@@ -5,7 +5,7 @@ using MediatR;
 
 namespace GPS.Application.Domain.Locations.Commands.CreateLocation;
 
-public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, long>
+public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, Unit>
 {
     private readonly ILocationRepository _locationRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -16,11 +16,19 @@ public class CreateLocationCommandHandler : IRequestHandler<CreateLocationComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<long> Handle(CreateLocationCommand command, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateLocationCommand command, CancellationToken cancellationToken)
     {
-        var location = await Location.CreateAsync(command.Latitude, command.Longitude, command.Address, command.UserId);
+        var location = await Location.CreateAsync(
+            command.Login,
+            command.Password,
+            command.FirstName,
+            command.LastName,
+            command.MiddleName,
+            command.JobTitle,
+            command.Latitude,
+            command.Longitude);
         await _locationRepository.AddAsync(location);
         await _unitOfWork.SaveChanges(cancellationToken);
-        return location.Id;
+        return Unit.Value;
     }
 }

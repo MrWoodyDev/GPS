@@ -1,6 +1,4 @@
-﻿using GPS.Core.Domain.Locations.Models;
-using GPS.Persistence.GpsDb;
-using GPS.Persistence.GPSDb;
+﻿using GPS.Persistence.GpsDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +16,5 @@ public static class PersistenceRegistration
 
         services.AddDbContext<GpsDbContext>(options =>
             options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
-
-        services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<GpsDbContext>();
     }
 }

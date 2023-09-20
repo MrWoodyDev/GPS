@@ -8,6 +8,6 @@ public class LocationEntityConfigurations : IEntityTypeConfiguration<Location>
 {
     public void Configure(EntityTypeBuilder<Location> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => new {x.Login, x.Password});
     }
 }

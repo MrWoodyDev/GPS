@@ -18,7 +18,9 @@ public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationComman
 
     public async Task<Unit> Handle(UpdateLocationCommand command, CancellationToken cancellationToken)
     {
-        await _locationRepository.UpdateAsync(command.Latitude, command.Longitude, command.Address, command.UserId);
+        var original = await _locationRepository.FindAsync(command.Login, command.Password);
+        var data = new UpdateLocationData(command.Latitude, command.Longitude);
+        await original.UpdateAsync(data, cancellationToken);
         await _unitOfWork.SaveChanges(cancellationToken);
         return Unit.Value;
     }

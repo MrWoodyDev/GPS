@@ -2,4 +2,4 @@
 
 namespace GPS.Application.Domain.Locations.Commands.RemoveLocation;
 
-public record RemoveLocationCommand(long Id) : IRequest<Unit>;
+public record RemoveLocationCommand(string Login, string Passwod) : IRequest<Unit>;
